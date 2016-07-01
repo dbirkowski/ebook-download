@@ -4,6 +4,7 @@ var cheerio = require('cheerio');
 var fs = require('fs');
 var path = require('path');
 var http = require('http');
+const EBOOKS_DIR = './ebooks/';
 const MAIN_URL = 'http://english.htu.cn/ePub.html';
 console.info('starting...');
 request(MAIN_URL, function (error, response, content) {
@@ -37,7 +38,7 @@ function downloadBooks(data) {
     data.each((i, el) => {
         let author = el.name;
         let books = el.books;
-        mkdirSync(author);
+        mkdirSync(EBOOKS_DIR + author);
 
         books.each((i, el) => {
             download(el.href, getPath(author, el.name));
@@ -54,7 +55,7 @@ function getName(name) {
 }
 
 function getPath(folder, file) {
-    return './' + folder + '/' + file + '.epub';
+    return EBOOKS_DIR + folder + '/' + file + '.epub';
 }
 
 function mkdirSync(path) {
