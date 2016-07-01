@@ -7,7 +7,7 @@ var http = require('http');
 const EBOOKS_DIR = './ebooks/';
 const MAIN_URL = 'http://english.htu.cn/ePub.html';
 console.info('starting...');
-request(MAIN_URL, function (error, response, content) {
+request(MAIN_URL, (error, response, content) => {
     console.info('request handled');
     if (!error) {
         let $ = cheerio.load(content);
